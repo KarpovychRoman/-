@@ -1,0 +1,33 @@
+#include <stdio.h>
+
+int countSequences(int n) {   //Обчислення кількості послідовностей довжиною n,
+    int mod = 12345;          //що складаються лише з нулів і одиниць
+    int a = 1, b = 2, c = 4;  //де не зустрічається три одиниці підряд
+
+    if (n == 1)
+        return 2;
+    if (n == 2)
+        return 4;
+
+    for (int i = 3; i <= n; i++) {
+        int temp = (a + b + c) % mod; //сума значень за модулем
+        a = b;
+        b = c;
+        c = temp;
+    }
+
+    return c;
+}
+
+int main() {
+    int n;
+
+    printf("Введіть довжину послідовності n: ");
+    scanf("%d", &n);
+
+    int result = countSequences(n); //повернуте значення зберігається в змінній result.
+
+    printf("Кількість шуканих послідовностей: %d\n", result);
+
+    return 0;
+}
